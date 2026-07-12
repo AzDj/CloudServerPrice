@@ -1,7 +1,7 @@
 // 本文件由 scripts/crawl-official-docs.mjs 生成，请勿手工修改。
-export const 官方文档更新时间 = "2026-07-12T06:23:52.084Z";
+export const 官方文档更新时间 = "2026-07-12T09:32:11.103Z";
 export const 官方文档抓取摘要 = {
-  "抓取时间": "2026-07-12T06:23:52.084Z",
+  "抓取时间": "2026-07-12T09:32:11.103Z",
   "日期": "2026-07-12",
   "总数": 6,
   "成功数量": 6,
@@ -32,7 +32,7 @@ export const 官方文档资讯 = [
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html;charset=UTF-8",
-    "抓取时间": "2026-07-12T06:23:52.084Z"
+    "抓取时间": "2026-07-12T09:32:11.103Z"
   },
   {
     "id": "tencent",
@@ -54,99 +54,106 @@ export const 官方文档资讯 = [
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html; charset=utf-8",
-    "抓取时间": "2026-07-12T06:23:52.084Z"
+    "抓取时间": "2026-07-12T09:32:11.103Z"
   },
   {
     "id": "huawei",
     "名称": "华为云",
-    "url": "https://support.huaweicloud.com/eu/productdesc-ecs/ecs_01_0065.html",
-    "最终地址": "https://support.huaweicloud.com/eu/productdesc-ecs/ecs_01_0065.html",
-    "标题": "Billing",
-    "摘要": "Elastic Cloud Server (ECS) ECSs are billed based on ECS specifications and the service duration. Pricing is based on the ECS type, flavor (including vCPUs and memory), required duration, and the number of purchased ECSs. For pricing details, see Elastic Cloud Server Pricing Details. Pricing is based on the ECS type, f...",
+    "url": "https://support.huaweicloud.com/productdesc-ecs/ecs_01_0065.html",
+    "最终地址": "https://support.huaweicloud.com/productdesc-ecs/ecs_01_0065.html",
+    "标题": "计费说明",
+    "摘要": "ECS根据您选择ECS实例规格和使用时长计费。 实例类型及规格（vCPU，内存），购买时长以及所购买的实例数量。 具体请参考弹性云服务器产品价格详情。 实例类型及规格（vCPU，内存），购买时长以及所购买的实例数量。 具体请参考弹性云服务器产品价格详情。",
     "正文摘录": [
-      "Elastic Cloud Server (ECS)",
-      "ECSs are billed based on ECS specifications and the service duration.",
-      "Pricing is based on the ECS type, flavor (including vCPUs and memory), required duration, and the number of purchased ECSs. For pricing details, see Elastic Cloud Server Pricing Details.",
-      "Pricing is based on the ECS type, flavor (including vCPUs and memory), required duration, and the number of purchased ECSs."
+      "ECS根据您选择ECS实例规格和使用时长计费。",
+      "实例类型及规格（vCPU，内存），购买时长以及所购买的实例数量。 具体请参考弹性云服务器产品价格详情。",
+      "实例类型及规格（vCPU，内存），购买时长以及所购买的实例数量。",
+      "具体请参考弹性云服务器产品价格详情。"
     ],
     "命中关键词": [
+      "计费",
+      "价格",
       "ECS",
-      "Elastic Cloud Server",
-      "pricing"
+      "弹性云服务器",
+      "实例"
     ],
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html; charset=utf-8",
-    "抓取时间": "2026-07-12T06:23:52.084Z"
+    "抓取时间": "2026-07-12T09:32:11.103Z"
   },
   {
     "id": "aws",
     "名称": "AWS",
-    "url": "https://aws.amazon.com/ec2/pricing/on-demand/",
-    "最终地址": "https://aws.amazon.com/cn/ec2/pricing/on-demand/",
-    "标题": "EC2 按需实例定价",
-    "摘要": "使用按需实例时，您可以按小时或秒（最少 60 秒）支付计算容量费用，无需签订长期合约。这样就可以降低规划、采购和维护硬件的成本和复杂性，并将通常较高的固定成本转换为较小的可变成本。 以下定价包括在指定操作系统上运行私有和公共AMI的成本（“Windows使用量” 价格适用于Windows Server 2003 R2、2008、2008 R2、2012、2012 R2、2012 R2、2016和2019）。亚马逊还为您提供了运行带有 SQL 服务器的微软 Windows 的 Amazon EC2、运行 SUSE Linux 企业服务器的 Amazon EC2 以及运行红帽企业 Linux 的 Amazon EC2... 注意：Re...",
+    "url": "https://www.amazonaws.cn/ec2/pricing/ec2-linux-pricing/",
+    "最终地址": "https://www.amazonaws.cn/ec2/pricing/ec2-linux-pricing/",
+    "标题": "EC2 Linux 定价",
+    "摘要": "使用按需实例，您只需按小时或秒（最少 60 秒）为计算容量付费，无需签订长期合同。因此，您可以不用考虑计划、购买和维护硬件的成本和复杂性，并可将常见的高额固定成本转换为较小的可变成本。 下面的定价包括在指定操作系统上运行私有和公有 AMI 的费用（“Windows 使用”价格适用于 Windows Server 2003 R2、2008、2008 R2、2012、2012 R2 和 2016）。Amazon 还为您提供了运行 Microsoft Windows with SQL Server 的 Amazon EC2、运行 SUSE Linux Enterprise Server 的 Amazon EC2、运行 Re... 定价按...",
     "正文摘录": [
-      "使用按需实例时，您可以按小时或秒（最少 60 秒）支付计算容量费用，无需签订长期合约。这样就可以降低规划、采购和维护硬件的成本和复杂性，并将通常较高的固定成本转换为较小的可变成本。",
-      "以下定价包括在指定操作系统上运行私有和公共AMI的成本（“Windows使用量” 价格适用于Windows Server 2003 R2、2008、2008 R2、2012、2012 R2、2012 R2、2016和2019）。亚马逊还为您提供了运行带有 SQL 服务器的微软 Windows 的 Amazon EC2、运行 SUSE Linux 企业服务器的 Amazon EC2 以及运行红帽企业 Linux 的 Amazon EC2...",
-      "注意：Red Hat 已经更新其 Red Hat Enterprise Linux（RHEL）的云定价模式。2024 年 7 月 1 日，EC2 RHEL 的定价更改为基于每个 vCPU 每小时的定价模式。在 AWS 上的 RHEL 定价页面中了解新价格。",
-      "定价按每个实例从启动到终止或停止使用的时间计算，以小时为单位。对于 Linux、Windows、装有 SQL Enterprise 的 Windows、装有 SQL Standard 的 Windows 和装有 SQL Web 的 Windows 实例，不足一小时将按秒计费；对于所有其他操作系统类型，则按一小时计费。"
+      "使用按需实例，您只需按小时或秒（最少 60 秒）为计算容量付费，无需签订长期合同。因此，您可以不用考虑计划、购买和维护硬件的成本和复杂性，并可将常见的高额固定成本转换为较小的可变成本。",
+      "下面的定价包括在指定操作系统上运行私有和公有 AMI 的费用（“Windows 使用”价格适用于 Windows Server 2003 R2、2008、2008 R2、2012、2012 R2 和 2016）。Amazon 还为您提供了运行 Microsoft Windows with SQL Server 的 Amazon EC2、运行 SUSE Linux Enterprise Server 的 Amazon EC2、运行 Re...",
+      "定价按每个实例所使用的实例小时，从启动到终止或停止的使用时间计算。对于 Linux 实例，不足一小时将按秒计费；对于所有其他实例类型，则按一小时计费。",
+      "vCPU 数量是指定 EC2 实例类型默认可用的最大 vCPU 数量。启动此实例类型时，您可以指定 vCPU 的自定义数量。实例定价将仍与上面显示的相同。有关有效的 vCPU 数量以及如何开始使用此功能的更多详细信息，请访问优化 CPU 文档。"
     ],
     "命中关键词": [
+      "定价",
+      "按需",
       "EC2",
+      "实例",
+      "计算",
       "价格",
+      "计费"
+    ],
+    "状态": "成功",
+    "http状态": 200,
+    "内容类型": "text/html;charset=utf-8",
+    "抓取时间": "2026-07-12T09:32:11.103Z"
+  },
+  {
+    "id": "azure",
+    "名称": "Azure",
+    "url": "https://www.azure.cn/pricing/details/virtual-machines/",
+    "最终地址": "https://www.azure.cn/pricing/details/virtual-machines/",
+    "标题": "Azure 虚拟机价格详情_预算 - Azure 云计算",
+    "摘要": "虚拟机 Virtual Machines 我们支持多种规模的虚拟机。虚拟机价格按分钟计费，以小时费率列出。如果虚拟机的运行时间不足 1 小时，则按总分钟数计费。 1.适用于已签署或者计划签署世纪互联在线服务标准协议客户的标准预付费价格 2.适用于已签署或者计划签署世纪互联在线服务高级协议客户的年预付费计算实例（CPP，Compute Pre-Purchase）价格。若您需要购买CPP，请您联系您的客户经理或者合作伙伴。 CPP节省百分比计算按照（每月标准预付费价格-CPP价格）/每月标准预付费价格 年预付费计算实例（简称CPP）是OSPA Azure客户获得计算资源（即虚拟机）折扣的最具性价比的方式。",
+    "正文摘录": [
+      "虚拟机 Virtual Machines",
+      "我们支持多种规模的虚拟机。虚拟机价格按分钟计费，以小时费率列出。如果虚拟机的运行时间不足 1 小时，则按总分钟数计费。",
+      "1.适用于已签署或者计划签署世纪互联在线服务标准协议客户的标准预付费价格",
+      "2.适用于已签署或者计划签署世纪互联在线服务高级协议客户的年预付费计算实例（CPP，Compute Pre-Purchase）价格。若您需要购买CPP，请您联系您的客户经理或者合作伙伴。 CPP节省百分比计算按照（每月标准预付费价格-CPP价格）/每月标准预付费价格 年预付费计算实例（简称CPP）是OSPA Azure客户获得计算资源（即虚拟机）折扣的最具性价比的方式。"
+    ],
+    "命中关键词": [
+      "价格",
+      "虚拟机",
       "计费",
       "实例"
     ],
     "状态": "成功",
     "http状态": 200,
-    "内容类型": "text/html;charset=utf-8",
-    "抓取时间": "2026-07-12T06:23:52.084Z"
-  },
-  {
-    "id": "azure",
-    "名称": "Azure",
-    "url": "https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/",
-    "最终地址": "https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/",
-    "标题": "Pricing - Linux Virtual Machines | Microsoft Azure",
-    "摘要": "Virtual Machines pricing Linux Virtual Machines Pricing Request a pricing quote Provision Windows and Linux Virtual Machines in seconds",
-    "正文摘录": [
-      "Virtual Machines pricing",
-      "Linux Virtual Machines Pricing",
-      "Request a pricing quote",
-      "Provision Windows and Linux Virtual Machines in seconds"
-    ],
-    "命中关键词": [
-      "pricing",
-      "Virtual Machines",
-      "Linux"
-    ],
-    "状态": "成功",
-    "http状态": 200,
-    "内容类型": "text/html; charset=utf-8",
-    "抓取时间": "2026-07-12T06:23:52.084Z"
+    "内容类型": "text/html",
+    "抓取时间": "2026-07-12T09:32:11.103Z"
   },
   {
     "id": "gcp",
     "名称": "Google Cloud",
-    "url": "https://cloud.google.com/compute/vm-instance-pricing",
-    "最终地址": "https://cloud.google.com/products/compute/pricing",
+    "url": "https://cloud.google.com/products/compute/pricing?hl=zh-CN",
+    "最终地址": "https://cloud.google.com/products/compute/pricing?hl=zh-CN",
     "标题": "虚拟机实例价格",
-    "摘要": "本页面介绍了运行 Compute Engine 虚拟机实例的费用。如需查看其他 Google Cloud 产品的价格，请参阅 Google Cloud 价格表。 查看适合您的工作负载和需求的虚拟机价格 为多种工作负载提供最佳性价比。详细了解 Google Cloud 针对 e2-micro 虚拟机实例的免费虚拟机计划。 详细了解 Google Cloud 针对 e2-micro 虚拟机实例的免费虚拟机计划。",
+    "摘要": "Google 自研芯片发布：Ironwood TPU 和全新 Axion 虚拟机，专为推理时代而设计。 本页面介绍了运行 Compute Engine 虚拟机实例的费用。如需查看其他 Google Cloud 产品的价格，请参阅 Google Cloud 价格表。 如何选择合适的虚拟机5 分钟视频解说 查看适合您的工作负载和需求的虚拟机价格",
     "正文摘录": [
+      "Google 自研芯片发布：Ironwood TPU 和全新 Axion 虚拟机，专为推理时代而设计。",
       "本页面介绍了运行 Compute Engine 虚拟机实例的费用。如需查看其他 Google Cloud 产品的价格，请参阅 Google Cloud 价格表。",
-      "查看适合您的工作负载和需求的虚拟机价格",
-      "为多种工作负载提供最佳性价比。详细了解 Google Cloud 针对 e2-micro 虚拟机实例的免费虚拟机计划。",
-      "详细了解 Google Cloud 针对 e2-micro 虚拟机实例的免费虚拟机计划。"
+      "如何选择合适的虚拟机5 分钟视频解说",
+      "查看适合您的工作负载和需求的虚拟机价格"
     ],
     "命中关键词": [
-      "Compute Engine",
       "价格",
+      "Compute Engine",
+      "虚拟机",
       "实例"
     ],
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html; charset=utf-8",
-    "抓取时间": "2026-07-12T06:23:52.084Z"
+    "抓取时间": "2026-07-12T09:32:11.103Z"
   }
 ];

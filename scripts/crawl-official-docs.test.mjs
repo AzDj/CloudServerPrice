@@ -7,6 +7,7 @@ import {
   带退避抓取,
   抓取官方文档,
   执行爬虫,
+  官方文档来源,
   抽取文档内容,
   校验官方地址,
   清理文本,
@@ -55,6 +56,19 @@ test('校验官方地址只允许 HTTPS 官方域名', () => {
       }),
     /官方域名白名单/,
   );
+});
+
+test('默认官方来源优先中国站和中文页面', () => {
+  const 来源映射 = Object.fromEntries(
+    官方文档来源.map((来源) => [来源.id, 来源]),
+  );
+
+  assert.match(来源映射.aliyun.url, /\/zh\//);
+  assert.match(来源映射.tencent.url, /cloud\.tencent\.com/);
+  assert.match(来源映射.huawei.url, /support\.huaweicloud\.com\/productdesc-ecs/);
+  assert.match(来源映射.aws.url, /amazonaws\.cn/);
+  assert.match(来源映射.azure.url, /azure\.cn/);
+  assert.match(来源映射.gcp.url, /hl=zh-CN/);
 });
 
 test('清理文本会压缩空白字符', () => {

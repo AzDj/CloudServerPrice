@@ -40,14 +40,9 @@ jobs:
       - name: 配置 Pages
         uses: actions/configure-pages@v6
 
-      - name: 计算 Vite 资源路径
+      - name: 配置 Vite 资源路径
         shell: bash
-        run: |
-          if [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
-            echo "VITE_BASE=/" >> "$GITHUB_ENV"
-          else
-            echo "VITE_BASE=/${{ github.event.repository.name }}/" >> "$GITHUB_ENV"
-          fi
+        run: echo "VITE_BASE=/" >> "$GITHUB_ENV"
 
       - name: 构建静态页面
         run: npm run build -- --base "$VITE_BASE"

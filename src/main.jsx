@@ -33,21 +33,21 @@ const 云商列表 = [
   {
     id: 'aws',
     名称: 'AWS',
-    官网: 'https://aws.amazon.com/',
+    官网: 'https://www.amazonaws.cn/',
     图标:
       'https://raw.githubusercontent.com/Templarian/MaterialDesign/master/svg/aws.svg',
   },
   {
     id: 'azure',
     名称: 'Azure',
-    官网: 'https://azure.microsoft.com/',
+    官网: 'https://www.azure.cn/',
     图标:
       'https://raw.githubusercontent.com/teenyicons/teenyicons/master/src/outline/azure.svg',
   },
   {
     id: 'gcp',
     名称: 'Google Cloud',
-    官网: 'https://cloud.google.com/',
+    官网: 'https://cloud.google.com/?hl=zh-CN',
     图标:
       'https://raw.githubusercontent.com/Keyamoon/IcoMoon-Free/master/SVG/395-google3.svg',
   },
@@ -122,6 +122,15 @@ const 地域映射 = {
     azure: 'West US 3',
     gcp: 'us-west1',
   },
+};
+
+const 精确地域云商 = {
+  华东: ['aliyun', 'tencent', 'huawei'],
+  华北: ['aliyun', 'tencent', 'huawei', 'aws', 'azure'],
+  华南: ['aliyun', 'tencent', 'huawei'],
+  新加坡: ['aliyun', 'tencent', 'huawei', 'aws', 'azure', 'gcp'],
+  东京: ['aliyun', 'tencent', 'huawei', 'aws', 'azure', 'gcp'],
+  美国西部: ['aliyun', 'tencent', 'huawei', 'aws', 'azure', 'gcp'],
 };
 
 const 服务器规格档位 = {
@@ -1167,9 +1176,16 @@ function 是RDS存储精确匹配(模块, 云商) {
   return !档位?.存储覆盖?.[云商.id];
 }
 
+function 是精确地域匹配(云商, 地域) {
+  return 精确地域云商[地域]?.includes(云商.id) ?? true;
+}
+
 function 获取单元格值(模块, 行, 云商, 状态) {
   if (行.动态 === 'region') {
-    return 地域映射[状态.地域][云商.id];
+    const 地域值 = 地域映射[状态.地域][云商.id];
+    return 是精确地域匹配(云商, 状态.地域)
+      ? 地域值
+      : 合并单元格提示(地域值, ['非筛选地域'], true);
   }
   if (行.动态 === 'billing') {
     return 状态.计费方式;
@@ -1202,11 +1218,23 @@ function 标准化单元格(值, 状态) {
 }
 
 function 添加单元格标签(单元格, 标签) {
+  const 原标签 =
+    标签 === '最低'
+      ? 单元格.标签.filter((当前标签) => 当前标签 !== '低价')
+      : 单元格.标签;
   return {
     ...单元格,
-    标签: 单元格.标签.includes(标签)
-      ? 单元格.标签
-      : [...单元格.标签, 标签],
+    标签: 原标签.includes(标签) ? 原标签 : [...原标签, 标签],
+  };
+}
+
+function 清理行标签(单元格, 行) {
+  if (行.维度 !== '实例规格') {
+    return 单元格;
+  }
+  return {
+    ...单元格,
+    标签: 单元格.标签.filter((标签) => 标签 !== '低价'),
   };
 }
 
@@ -1309,7 +1337,7 @@ function App() {
           />
         ))}
         <footer className="disclaimer">
-          官方文档资讯由构建前爬虫抓取公开文档生成；表格价格仍需按来源文档逐项核对，实际成交价受采购规模、专属协议、定向优惠影响，仅供选型参考，非最终结算价。
+          官方文档资讯由构建前爬虫优先抓取中国站或中文公开文档生成；表格价格仍需按来源文档逐项核对，实际成交价受采购规模、专属协议、定向优惠影响，仅供选型参考，非最终结算价。
         </footer>
       </section>
     </main>
@@ -1596,9 +1624,13 @@ function PriceModule({
                     (行.最低价字段 &&
                       获取最低云商(展示模块数据, 行.最低价字段) === 云商.id) ||
                     (行.维度 === '最低价标记' && 最低云商 === 云商.id);
+                  const 基础单元格 = 清理行标签(
+                    标准化单元格(原始值, 状态),
+                    行,
+                  );
                   const 单元格 = 是否最低
-                    ? 添加单元格标签(标准化单元格(原始值, 状态), '最低')
-                    : 标准化单元格(原始值, 状态);
+                    ? 添加单元格标签(基础单元格, '最低')
+                    : 基础单元格;
                   return (
                     <td
                       key={云商.id}
