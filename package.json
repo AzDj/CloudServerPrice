@@ -4,15 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "docs:crawl": "node scripts/crawl-official-docs.mjs",
     "dev": "vite --host 0.0.0.0",
+    "prebuild": "npm run docs:crawl",
     "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test scripts/*.test.mjs",
+    "test:coverage": "c8 --check-coverage --lines 90 --branches 90 --functions 90 --statements 90 --exclude \"scripts/*.test.mjs\" node --test scripts/*.test.mjs"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "@vitejs/plugin-react": "6.0.3",
+    "cheerio": "1.2.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "vite": "8.1.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "c8": "11.0.0"
+  }
 }

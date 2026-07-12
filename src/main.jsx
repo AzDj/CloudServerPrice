@@ -1,8 +1,10 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
+import { 官方文档更新时间, 官方文档资讯 } from './generated/official-docs-data.js';
 
-const 更新日期 = '2026-07-12';
+const 更新日期 = 官方文档更新时间.slice(0, 10);
+const 官方文档映射 = Object.fromEntries(官方文档资讯.map((文档) => [文档.id, 文档]));
 const GITHUB_ICON_URL =
   'https://raw.githubusercontent.com/ant-design/ant-design-icons/master/packages/icons-svg/svg/filled/github.svg';
 
@@ -1285,7 +1287,10 @@ function App() {
         className="table-stack"
         aria-label="云服务价格对比表"
       >
-        <div className="index-status">更新于 {更新日期}</div>
+        <div className="index-status">
+          官方文档资讯更新于 {更新日期}
+        </div>
+        <OfficialDocsPanel 文档列表={官方文档资讯} />
         {可见模块.map((模块, 索引) => (
           <PriceModule
             key={模块.id}
@@ -1304,10 +1309,48 @@ function App() {
           />
         ))}
         <footer className="disclaimer">
-          比价数据取自各厂商公开价目文档，实际成交价受采购规模、专属协议、定向优惠影响，仅供选型参考，非最终结算价。
+          官方文档资讯由构建前爬虫抓取公开文档生成；表格价格仍需按来源文档逐项核对，实际成交价受采购规模、专属协议、定向优惠影响，仅供选型参考，非最终结算价。
         </footer>
       </section>
     </main>
+  );
+}
+
+function OfficialDocsPanel({ 文档列表 }) {
+  const 成功数量 = 文档列表.filter((文档) => 文档.状态 === '成功').length;
+
+  return (
+    <section className="docs-panel" aria-label="官方文档资讯">
+      <div className="docs-panel-head">
+        <h2>官方文档资讯</h2>
+        <span>
+          {成功数量}/{文档列表.length} 抓取成功
+        </span>
+      </div>
+      <div className="docs-grid">
+        {文档列表.map((文档) => (
+          <article
+            className={`doc-item ${文档.状态 === '成功' ? '' : 'is-failed'}`}
+            key={文档.id}
+          >
+            <div className="doc-item-head">
+              <a href={文档.最终地址 || 文档.url} target="_blank" rel="noreferrer">
+                {文档.名称}
+              </a>
+              <span>{文档.状态}</span>
+            </div>
+            <p>{文档.摘要}</p>
+            {文档.命中关键词.length > 0 ? (
+              <div className="doc-keywords">
+                {文档.命中关键词.map((关键词) => (
+                  <span key={关键词}>{关键词}</span>
+                ))}
+              </div>
+            ) : null}
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -1517,6 +1560,19 @@ function PriceModule({
                       </span>
                       <span className="vendor-name">{云商.名称}</span>
                     </a>
+                    {官方文档映射[云商.id] ? (
+                      <a
+                        className="doc-link"
+                        href={
+                          官方文档映射[云商.id].最终地址 ||
+                          官方文档映射[云商.id].url
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        官方文档
+                      </a>
+                    ) : null}
                     <button
                       className="lock-mark"
                       type="button"
