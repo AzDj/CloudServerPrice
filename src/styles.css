@@ -347,6 +347,8 @@ select {
 }
 
 .dimension-head {
+  position: sticky !important;
+  left: 0;
   z-index: 24;
 }
 

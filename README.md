@@ -96,32 +96,58 @@ source_url
 collected_at
 ```
 
-## GitHub Actions 与 Pages 设计
+## GitHub Actions 与 Pages 操作
 
-建议数据流：
+当前仓库已内置 `.github/workflows/deploy.yml`，页面仍使用前端模拟数据；接入真实采集前，GitHub Actions 只负责安装依赖、构建 Vite 静态产物并发布到 GitHub Pages。
 
-```text
-GitHub Actions 私有环境密钥
-        |
-        v
-调用云厂商 API / 读取公开价目数据
-        |
-        v
-生成标准化 JSON
-        |
-        v
-构建 Vite 静态页面
-        |
-        v
-发布到 GitHub Pages
-```
+### Actions 操作
+
+1. 在 GitHub 仓库进入 `Settings` -> `Pages`，将 `Build and deployment` 的 `Source` 设为 `GitHub Actions`。
+2. 推送到 `main` 或 `master` 分支会自动触发部署；也可以在仓库 `Actions` -> `部署 GitHub Pages` -> `Run workflow` 手动触发。
+3. 工作流权限已经配置为 `contents: read`、`pages: write`、`id-token: write`，用于读取仓库、上传 Pages 构件和部署 Pages。
+4. 工作流会执行 `npm ci`、计算 Vite `base`、执行 `npm run build -- --base "$VITE_BASE"`，并上传 `dist` 目录。
+5. 发布完成后，在 workflow 的 `Deploy to GitHub Pages` 步骤或 `github-pages` 环境中查看部署地址。
+6. 当前没有采集脚本，不要在 workflow 中配置伪采集命令；后续新增真实采集脚本后，只允许在采集步骤读取 GitHub Secrets，并输出脱敏后的静态 JSON。
+7. 生成数据建议落到 `public/prices.json` 或构建前生成到 `src/generated/prices.json`，文件内容只保留公开价格、规格、来源链接和采集时间，不保留请求签名、账号、密钥或原始鉴权响应。
+
+### Pages 操作
+
+1. 如果站点发布到 `https://<USERNAME>.github.io/` 或自定义域名，Vite `base` 使用 `/`。
+2. 如果站点发布到 `https://<USERNAME>.github.io/<REPO>/`，Vite `base` 必须使用 `/<REPO>/`；例如仓库名为 `CloudServerPrice` 时使用 `/CloudServerPrice/`。
+3. 当前项目未配置 `vite.config.js`，发布到 GitHub 项目页前需要补齐 `base` 配置或在构建命令中传入对应 `--base`，否则构建后的资源路径可能在 Pages 上 404。
+4. Pages 只发布 `dist` 中的静态文件，入口文件必须位于构件根目录，也就是 `dist/index.html`。
+5. 发布完成后，在 Actions 的 `github-pages` 环境链接或仓库 `Settings` -> `Pages` 中查看线上地址。
+
+### 密钥情况
+
+当前静态展示与 Pages 发布不需要人工配置云商密钥；`GITHUB_TOKEN` 由 GitHub Actions 自动注入，用于 Pages 部署，不需要写入 Secrets。
+
+| 场景 | 是否需要密钥 | 配置位置 | 说明 |
+| --- | --- | --- | --- |
+| 本地开发模拟数据 | 不需要 | 无 | 执行 `npm run dev` 即可。 |
+| 构建并发布 GitHub Pages | 不需要云商密钥 | 无 | 仅使用 GitHub 自动注入的 `GITHUB_TOKEN`。 |
+| 读取公开价格页面或公开价格 API | 通常不需要 | 无 | 若官方公开接口无需鉴权，不配置对应云商密钥。 |
+| 调用云商鉴权 API 采集价格 | 需要 | `Settings` -> `Secrets and variables` -> `Actions` | 只放 Repository Secrets 或 Environment Secrets。 |
+
+真实采集时建议按云商拆分密钥，未启用的云商不配置对应密钥：
+
+| 云商 | 建议密钥名 | 用途 |
+| --- | --- | --- |
+| 阿里云 | `ALIYUN_ACCESS_KEY_ID`、`ALIYUN_ACCESS_KEY_SECRET`、`ALIYUN_REGION_ID` | 查询 ECS、OSS、RDS 等公开价目或账号可见报价。 |
+| 腾讯云 | `TENCENTCLOUD_SECRET_ID`、`TENCENTCLOUD_SECRET_KEY`、`TENCENTCLOUD_REGION` | 查询 CVM、COS、TencentDB 等价格接口。 |
+| 华为云 | `HUAWEICLOUD_ACCESS_KEY`、`HUAWEICLOUD_SECRET_KEY`、`HUAWEICLOUD_REGION`、`HUAWEICLOUD_PROJECT_ID` | 查询 ECS、OBS、RDS 等价格接口。 |
+| AWS | `AWS_ACCESS_KEY_ID`、`AWS_SECRET_ACCESS_KEY`、`AWS_REGION` | 查询 AWS 价格 API 或账号可见报价。 |
+| Azure | `AZURE_CLIENT_ID`、`AZURE_CLIENT_SECRET`、`AZURE_TENANT_ID`、`AZURE_SUBSCRIPTION_ID` | 使用服务主体查询 Azure 零售价或订阅报价。 |
+| Google Cloud | `GCP_SERVICE_ACCOUNT_JSON`、`GCP_PROJECT_ID` | 使用服务账号查询 Google Cloud 价格或账单目录。 |
 
 密钥约束：
 
 - 云厂商 `AccessKey`、`SecretKey`、Token 只允许保存在 GitHub Actions Secrets 或 Environment Secrets。
 - 不要把真实密钥写入源码、README、提交历史、构建产物或浏览器端环境变量。
+- 不要使用 `VITE_` 前缀保存密钥，`VITE_` 变量会进入浏览器端构建产物。
 - Pages 前端只读取构建后的公开静态 JSON。
 - 若某价格只能通过登录态、验证码、专属协议或非公开接口获得，不应在前端绕过访问控制。
+- 无迁移，直接替换。
 
 ## 价格口径
 
