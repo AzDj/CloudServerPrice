@@ -1,0 +1,644 @@
+:root {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --bg: #ffffff;
+  --text: #292929;
+  --muted: #999999;
+  --line: #e6e6e6;
+  --line-strong: #cfcfcf;
+  --panel: #ffffff;
+  --soft: #f7f7f7;
+  --hover: #f2f2f2;
+  --lowest: #ecf6ee;
+  --lowest-line: #9bc8a4;
+  --tag-bg: #f0f0f0;
+  --tag-text: #535353;
+  --first-col: 172px;
+  --vendor-col: 218px;
+  --header-offset: 91px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.app-shell.is-dark {
+  color-scheme: dark;
+  --bg: #080808;
+  --text: #f2f2f2;
+  --muted: #8d8d8d;
+  --line: #272727;
+  --line-strong: #3a3a3a;
+  --panel: #080808;
+  --soft: #111111;
+  --hover: #191919;
+  --lowest: #102015;
+  --lowest-line: #4f8a59;
+  --tag-bg: #1f1f1f;
+  --tag-text: #d0d0d0;
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.header-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  gap: 16px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.mode-cell {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--text);
+}
+
+.top-nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.top-nav a {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    opacity 0.15s ease,
+    color 0.3s ease;
+}
+
+.top-nav a:hover {
+  opacity: 0.68;
+}
+
+.github-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+.toggle {
+  display: inline-flex;
+  height: 25px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.3s ease;
+}
+
+.toggle:hover,
+.toggle.is-active {
+  border-color: var(--line-strong);
+  background: var(--soft);
+}
+
+.switch-dot {
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--muted);
+  border-radius: 999px;
+}
+
+.toggle.is-active .switch-dot {
+  border-color: var(--lowest-line);
+  background: var(--lowest-line);
+}
+
+.controls {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line);
+  scrollbar-width: thin;
+}
+
+.select-control {
+  display: inline-grid;
+  grid-template-columns: auto minmax(112px, auto);
+  min-width: max-content;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-right: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.select-control select {
+  min-width: 112px;
+  height: 28px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.15s ease;
+}
+
+.select-control select:focus {
+  outline: 1px solid var(--line-strong);
+}
+
+.table-stack {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+  padding-top: var(--header-offset);
+}
+
+.index-status {
+  padding: 18px 16px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.price-module {
+  min-width: 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  opacity: 0;
+  animation: module-in 0.45s ease forwards;
+  animation-delay: calc(var(--enter-order) * 70ms);
+  transition: background-color 0.3s ease;
+}
+
+@keyframes module-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.module-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  padding: 48px 16px 42px;
+}
+
+.module-head h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(24px, 4.6vw, 72px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.table-scroll {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  cursor: grab;
+  scrollbar-width: thin;
+}
+
+.table-scroll.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.price-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  background: var(--panel);
+  color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.dimension-col {
+  width: var(--first-col);
+}
+
+.vendor-col {
+  width: var(--vendor-col);
+}
+
+.price-table th,
+.price-table td {
+  width: var(--vendor-col);
+  min-width: var(--vendor-col);
+  max-width: var(--vendor-col);
+  height: 56px;
+  padding: 10px 12px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  text-align: center;
+  vertical-align: middle;
+  scroll-snap-align: start;
+  transition:
+    background-color 0.15s ease,
+    color 0.3s ease,
+    opacity 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.is-compact .price-table th,
+.is-compact .price-table td {
+  height: 42px;
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+.price-table thead th {
+  position: static;
+  z-index: 14;
+  height: 92px;
+  border-bottom-color: var(--line-strong);
+  background: var(--panel);
+}
+
+.dimension-head,
+.dimension-cell {
+  position: sticky;
+  left: 0;
+  z-index: 18;
+  width: var(--first-col) !important;
+  min-width: var(--first-col) !important;
+  max-width: var(--first-col) !important;
+  border-right-color: var(--line-strong) !important;
+  background: var(--soft) !important;
+  color: var(--muted) !important;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dimension-head {
+  z-index: 24;
+}
+
+.price-table tr:hover th,
+.price-table tr:hover td {
+  background: var(--hover);
+}
+
+.price-table tr:hover .dimension-cell {
+  color: var(--text) !important;
+}
+
+.price-table td.is-col-hover,
+.price-table th.is-col-hover {
+  background: var(--hover);
+}
+
+.price-table td.is-locked,
+.price-table th.is-locked {
+  position: sticky;
+  left: var(--first-col);
+  z-index: 16;
+  background: var(--panel);
+  border-left: 1px solid var(--line-strong);
+  border-right-color: var(--line-strong);
+  box-shadow: 1px 0 0 var(--line);
+}
+
+.price-table thead th.is-locked {
+  z-index: 23;
+}
+
+.vendor-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  width: 100%;
+  min-height: 70px;
+  align-content: center;
+  justify-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: center;
+}
+
+.vendor-link {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.vendor-link:hover .vendor-name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.vendor-mark {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+}
+
+.is-dark .vendor-mark {
+  background: #ffffff;
+}
+
+.vendor-icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.lock-mark {
+  min-height: 20px;
+  padding: 0 6px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.lock-mark:hover {
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.is-locked .lock-mark,
+.is-lowest-provider .vendor-mark {
+  color: var(--text);
+  border-color: var(--lowest-line);
+}
+
+.cell-content {
+  display: grid;
+  min-width: 0;
+  min-height: 100%;
+  place-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.cell-main {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.unit {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.1;
+}
+
+.is-number .cell-content {
+  justify-items: center;
+  text-align: center;
+}
+
+.is-number .cell-main {
+  font-variant-numeric: tabular-nums;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.is-number .tag-row {
+  justify-content: center;
+}
+
+.mini-tag {
+  display: inline-flex;
+  max-width: 100%;
+  min-height: 17px;
+  align-items: center;
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 10px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.price-table td.is-lowest {
+  border-color: var(--lowest-line);
+  background: var(--lowest);
+}
+
+.price-table td.is-good-price {
+  border-color: var(--lowest-line);
+  background: var(--lowest);
+}
+
+.price-table td.is-warning {
+  border-color: #e0a6a6;
+  background: #fff5f5;
+}
+
+.is-dark .price-table td.is-warning {
+  border-color: #7d3f3f;
+  background: #211212;
+}
+
+.mini-tag.is-lowest-tag {
+  border-color: var(--lowest-line);
+  background: var(--lowest);
+  color: var(--text);
+}
+
+.mini-tag.is-good-price-tag {
+  border-color: var(--lowest-line);
+  background: var(--lowest);
+  color: var(--text);
+}
+
+.mini-tag.is-warning-tag {
+  border-color: #e0a6a6;
+  background: #fff5f5;
+  color: #9a2f2f;
+}
+
+.is-dark .mini-tag.is-warning-tag {
+  border-color: #7d3f3f;
+  background: #2a1717;
+  color: #f0b4b4;
+}
+
+.only-lowest .price-table .is-muted {
+  opacity: 0.34;
+}
+
+.only-lowest .price-table .is-lowest-provider,
+.only-lowest .price-table .is-lowest {
+  opacity: 1;
+}
+
+.disclaimer {
+  padding: 18px 16px 26px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+@media (max-width: 960px) {
+  :root {
+    --first-col: 146px;
+    --vendor-col: 170px;
+    --header-offset: 91px;
+  }
+
+  .table-stack {
+    padding-top: var(--header-offset);
+  }
+
+  .module-head {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding-top: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --first-col: 128px;
+    --vendor-col: 140px;
+    --header-offset: 156px;
+  }
+
+  .site-header {
+    max-height: 76vh;
+  }
+
+  .header-toolbar {
+    min-height: 42px;
+    padding: 8px 12px;
+  }
+
+  .mode-cell {
+    align-items: center;
+  }
+
+  .controls {
+    padding-left: 0;
+  }
+
+  .select-control {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding: 8px 12px;
+  }
+
+  .select-control select {
+    min-width: 120px;
+  }
+
+  .table-stack {
+    padding-top: var(--header-offset);
+  }
+
+  .module-head {
+    padding: 24px 12px 28px;
+  }
+
+  .price-table th,
+  .price-table td {
+    height: 54px;
+    padding: 9px 10px;
+  }
+
+  .cell-main {
+    font-size: 12px;
+  }
+}
