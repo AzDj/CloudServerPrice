@@ -21,6 +21,7 @@
 - 支持紧凑模式、暗色模式、只看最低价。
 - 支持最低价绿色标记和 `最低` 标签。
 - 支持就近地域、非筛选地域、就近规格、非筛选规格红色提醒。
+- 支持在官方文档资讯中搜索 GCP `e2-medium` 等结构化实例规格。
 - 支持云商官网、官方文档和 GitHub 仓库跳转。
 - 移动端保留横向滚动表格，不降级为卡片。
 
@@ -103,9 +104,10 @@ npm run test:coverage
 - 华为云：`huaweicloud.com`
 - AWS 中国：`amazonaws.cn`
 - Azure 中国：`azure.cn`
-- Google Cloud 中文：`cloud.google.com?hl=zh-CN`
+- Google Cloud 中文：`docs.cloud.google.com/compute/docs/general-purpose-machines?hl=zh-CN`
 
 爬虫会用 Cheerio 移除脚本、样式、导航和页脚等非正文内容，再按价格、计费、实例、存储、网络、带宽、CDN 等关键词抽取摘要、正文摘录和命中关键词。该流程不会把官方页面价格自动解析成表格行列，也不会替代表格中的静态价格口径。
+GCP 主入口直接使用 Compute Engine 通用机器系列官方文档，确保 `e2-medium` 的 E2 共享核心规格可被页面和源码搜索命中；虚拟机实例价格页作为相关官方链接保留。
 
 退避策略：
 
@@ -127,6 +129,8 @@ url
 摘要
 正文摘录
 命中关键词
+相关链接
+实例规格
 状态
 http状态
 内容类型

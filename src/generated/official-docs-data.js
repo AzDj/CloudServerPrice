@@ -1,7 +1,7 @@
 // 本文件由 scripts/crawl-official-docs.mjs 生成，请勿手工修改。
-export const 官方文档更新时间 = "2026-07-12T09:32:11.103Z";
+export const 官方文档更新时间 = "2026-07-12T15:00:37.552Z";
 export const 官方文档抓取摘要 = {
-  "抓取时间": "2026-07-12T09:32:11.103Z",
+  "抓取时间": "2026-07-12T15:00:37.552Z",
   "日期": "2026-07-12",
   "总数": 6,
   "成功数量": 6,
@@ -29,10 +29,12 @@ export const 官方文档资讯 = [
       "按量",
       "存储"
     ],
+    "相关链接": [],
+    "实例规格": [],
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html;charset=UTF-8",
-    "抓取时间": "2026-07-12T09:32:11.103Z"
+    "抓取时间": "2026-07-12T15:00:37.552Z"
   },
   {
     "id": "tencent",
@@ -51,10 +53,12 @@ export const 官方文档资讯 = [
       "计费",
       "实例"
     ],
+    "相关链接": [],
+    "实例规格": [],
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html; charset=utf-8",
-    "抓取时间": "2026-07-12T09:32:11.103Z"
+    "抓取时间": "2026-07-12T15:00:37.552Z"
   },
   {
     "id": "huawei",
@@ -76,10 +80,12 @@ export const 官方文档资讯 = [
       "弹性云服务器",
       "实例"
     ],
+    "相关链接": [],
+    "实例规格": [],
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html; charset=utf-8",
-    "抓取时间": "2026-07-12T09:32:11.103Z"
+    "抓取时间": "2026-07-12T15:00:37.552Z"
   },
   {
     "id": "aws",
@@ -103,10 +109,12 @@ export const 官方文档资讯 = [
       "价格",
       "计费"
     ],
+    "相关链接": [],
+    "实例规格": [],
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html;charset=utf-8",
-    "抓取时间": "2026-07-12T09:32:11.103Z"
+    "抓取时间": "2026-07-12T15:00:37.552Z"
   },
   {
     "id": "azure",
@@ -127,33 +135,55 @@ export const 官方文档资讯 = [
       "计费",
       "实例"
     ],
+    "相关链接": [],
+    "实例规格": [],
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html",
-    "抓取时间": "2026-07-12T09:32:11.103Z"
+    "抓取时间": "2026-07-12T15:00:37.552Z"
   },
   {
     "id": "gcp",
     "名称": "Google Cloud",
-    "url": "https://cloud.google.com/products/compute/pricing?hl=zh-CN",
-    "最终地址": "https://cloud.google.com/products/compute/pricing?hl=zh-CN",
-    "标题": "虚拟机实例价格",
-    "摘要": "Google 自研芯片发布：Ironwood TPU 和全新 Axion 虚拟机，专为推理时代而设计。 本页面介绍了运行 Compute Engine 虚拟机实例的费用。如需查看其他 Google Cloud 产品的价格，请参阅 Google Cloud 价格表。 如何选择合适的虚拟机5 分钟视频解说 查看适合您的工作负载和需求的虚拟机价格",
+    "url": "https://docs.cloud.google.com/compute/docs/general-purpose-machines?hl=zh-CN",
+    "最终地址": "https://docs.cloud.google.com/compute/docs/general-purpose-machines?hl=zh-CN",
+    "标题": "Compute Engine 的通用机器家族 | Google Cloud Documentation",
+    "摘要": "E2、E2 共享核心、N2、N2D、Tau T2A 和 Tau T2D 是该系列的第二代机器系列；N1 及其相关的共享核心机器类型是第一代机器系列。 E2 共享核心机器性价比高，具备 Virtio Memory Balloon 设备，是处理小型工作负载的理想之选。E2 机器系列共享核心机器类型使用上下文切换功能进行多任务处理，并在特定时间段内分时共享单个物理核心。不同的共享核心机器类型有不同的物理核心运行时间。 e2-medium 维持 2 个 vCPU，每个 vCPU 占 CPU 时间的 50%，总计占 CPU 时间的 100%。 e2-micro、e2-small 和 e2-medium 共享核心虚拟机可能会爆发数十秒。如果 ...",
     "正文摘录": [
-      "Google 自研芯片发布：Ironwood TPU 和全新 Axion 虚拟机，专为推理时代而设计。",
-      "本页面介绍了运行 Compute Engine 虚拟机实例的费用。如需查看其他 Google Cloud 产品的价格，请参阅 Google Cloud 价格表。",
-      "如何选择合适的虚拟机5 分钟视频解说",
-      "查看适合您的工作负载和需求的虚拟机价格"
+      "E2、E2 共享核心、N2、N2D、Tau T2A 和 Tau T2D 是该系列的第二代机器系列；N1 及其相关的共享核心机器类型是第一代机器系列。",
+      "E2 共享核心机器性价比高，具备 Virtio Memory Balloon 设备，是处理小型工作负载的理想之选。E2 机器系列共享核心机器类型使用上下文切换功能进行多任务处理，并在特定时间段内分时共享单个物理核心。不同的共享核心机器类型有不同的物理核心运行时间。",
+      "e2-medium 维持 2 个 vCPU，每个 vCPU 占 CPU 时间的 50%，总计占 CPU 时间的 100%。",
+      "e2-micro、e2-small 和 e2-medium 共享核心虚拟机可能会爆发数十秒。如果 CPU 利用率为 100%，则爆发持续时长如下："
     ],
     "命中关键词": [
-      "价格",
-      "Compute Engine",
       "虚拟机",
-      "实例"
+      "机器类型",
+      "E2",
+      "e2-medium"
+    ],
+    "相关链接": [
+      {
+        "标题": "虚拟机实例价格",
+        "url": "https://cloud.google.com/products/compute/pricing?hl=zh-CN"
+      }
+    ],
+    "实例规格": [
+      {
+        "名称": "e2-medium",
+        "系列": "E2 共享核心",
+        "cpu": "2 vCPU",
+        "小数vCPU": "1",
+        "内存": "4 GB",
+        "永久性磁盘上限": "16 个",
+        "永久性磁盘总容量上限": "3 TiB",
+        "本地SSD": "否",
+        "出站带宽上限": "最多 2 Gbps",
+        "官方文档": "https://docs.cloud.google.com/compute/docs/general-purpose-machines?hl=zh-CN"
+      }
     ],
     "状态": "成功",
     "http状态": 200,
     "内容类型": "text/html; charset=utf-8",
-    "抓取时间": "2026-07-12T09:32:11.103Z"
+    "抓取时间": "2026-07-12T15:00:37.552Z"
   }
 ];

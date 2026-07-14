@@ -338,6 +338,61 @@ select {
   overflow-wrap: anywhere;
 }
 
+.doc-specs {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.doc-spec-row {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.doc-spec-row a {
+  width: fit-content;
+  max-width: 100%;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.doc-spec-row a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.doc-spec-row span {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.doc-related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.doc-related-links a {
+  color: var(--accent);
+  font-size: 11px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.doc-related-links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .price-module {
   min-width: 0;
   border-bottom: 1px solid var(--line);

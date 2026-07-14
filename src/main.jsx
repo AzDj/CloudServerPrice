@@ -1375,6 +1375,42 @@ function OfficialDocsPanel({ 文档列表 }) {
                 ))}
               </div>
             ) : null}
+            {文档.实例规格?.length > 0 ? (
+              <div className="doc-specs" aria-label={`${文档.名称}实例规格`}>
+                {文档.实例规格.map((规格) => (
+                  <div className="doc-spec-row" key={规格.名称}>
+                    <a
+                      href={规格.官方文档 || 文档.最终地址 || 文档.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {规格.名称}
+                    </a>
+                    <span>
+                      {规格.系列} / {规格.cpu} / {规格.小数vCPU} 小数 vCPU /{' '}
+                      {规格.内存} / {规格.出站带宽上限}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            {文档.相关链接?.length > 0 ? (
+              <div
+                className="doc-related-links"
+                aria-label={`${文档.名称}相关官方链接`}
+              >
+                {文档.相关链接.map((链接) => (
+                  <a
+                    href={链接.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    key={链接.url}
+                  >
+                    {链接.标题}
+                  </a>
+                ))}
+              </div>
+            ) : null}
           </article>
         ))}
       </div>

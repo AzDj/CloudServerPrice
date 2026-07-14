@@ -68,7 +68,10 @@ test('默认官方来源优先中国站和中文页面', () => {
   assert.match(来源映射.huawei.url, /support\.huaweicloud\.com\/productdesc-ecs/);
   assert.match(来源映射.aws.url, /amazonaws\.cn/);
   assert.match(来源映射.azure.url, /azure\.cn/);
+  assert.match(来源映射.gcp.url, /general-purpose-machines/);
   assert.match(来源映射.gcp.url, /hl=zh-CN/);
+  assert.equal(来源映射.gcp.实例规格[0].名称, 'e2-medium');
+  assert.match(来源映射.gcp.相关链接[0].url, /products\/compute\/pricing/);
 });
 
 test('清理文本会压缩空白字符', () => {
@@ -110,6 +113,28 @@ test('抽取文档内容会提取标题、摘要和命中关键词', () => {
   assert.match(内容.摘要, /pricing/);
   assert.ok(内容.命中关键词.includes('计费'));
   assert.ok(内容.正文摘录.length >= 2);
+});
+
+test('抽取文档内容会优先展示指定规格关键词', () => {
+  const html = `
+    <html>
+      <body>
+        <h1>通用机器系列</h1>
+        <p>Compute Engine 虚拟机价格和区域信息用于通用比价入口。</p>
+        <p>E2 共享核心虚拟机中 e2-medium 维持 2 个 vCPU，每个 vCPU 占 CPU 时间的 50%，总计占 CPU 时间的 100%。</p>
+        <p>e2-medium 机器类型提供 2 vCPU、1 个小数 vCPU、4 GB 内存和最多 2 Gbps 出站带宽。</p>
+      </body>
+    </html>
+  `;
+  const 内容 = 抽取文档内容(html, 示例来源.url, {
+    ...示例来源,
+    关键词: ['Compute Engine', '机器类型', 'e2-medium'],
+    优先关键词: ['e2-medium'],
+  });
+
+  assert.match(内容.正文摘录[0], /e2-medium/);
+  assert.match(内容.摘要, /2 vCPU/);
+  assert.ok(内容.命中关键词.includes('e2-medium'));
 });
 
 test('抽取文档内容在没有关键词命中时回退到正文段落', () => {
@@ -214,28 +239,44 @@ test('带退避抓取会报告非可重试 HTTP 错误', async () => {
 });
 
 test('抓取官方文档成功时返回可展示资讯', async () => {
-  const 文档 = await 抓取官方文档(示例来源, {
-    抓取时间: '2026-07-12T00:00:00.000Z',
-    fetch实现: async () =>
-      创建响应({
-        body: '<html><body><h1>价格</h1><p>实例 pricing 与计费信息按地域展示，适合比价采集。</p></body></html>',
-      }),
-  });
+  const 文档 = await 抓取官方文档(
+    {
+      ...示例来源,
+      相关链接: [{ 标题: '规格文档', url: 'https://docs.example.com/specs' }],
+      实例规格: [{ 名称: 'e2-medium', cpu: '2 vCPU', 内存: '4 GB' }],
+    },
+    {
+      抓取时间: '2026-07-12T00:00:00.000Z',
+      fetch实现: async () =>
+        创建响应({
+          body: '<html><body><h1>价格</h1><p>实例 pricing 与计费信息按地域展示，适合比价采集。</p></body></html>',
+        }),
+    },
+  );
 
   assert.equal(文档.状态, '成功');
   assert.equal(文档.http状态, 200);
   assert.match(文档.摘要, /计费信息/);
+  assert.equal(文档.相关链接[0].标题, '规格文档');
+  assert.equal(文档.实例规格[0].名称, 'e2-medium');
 });
 
 test('抓取官方文档失败时返回失败状态而不抛出', async () => {
-  const 文档 = await 抓取官方文档(示例来源, {
-    fetch实现: async () => {
-      throw new Error('网络失败');
+  const 文档 = await 抓取官方文档(
+    {
+      ...示例来源,
+      实例规格: [{ 名称: 'e2-medium', cpu: '2 vCPU', 内存: '4 GB' }],
     },
-  });
+    {
+      fetch实现: async () => {
+        throw new Error('网络失败');
+      },
+    },
+  );
 
   assert.equal(文档.状态, '失败');
   assert.match(文档.摘要, /网络失败/);
+  assert.equal(文档.实例规格[0].名称, 'e2-medium');
 });
 
 test('抓取官方文档可以处理非 Error 类型失败', async () => {
